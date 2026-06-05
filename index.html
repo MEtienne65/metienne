@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michel Etienne – Bureau d'expertises</title>
+  <meta name="description" content="Bureau d'expertises en formation professionnelle et Système d'Assurance Qualité. Conseil, audit et assistance technique en Suisse et à l'international." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --beige:      #f5f0e8;
+      --beige-dark: #e8e0d0;
+      --sage:       #7a9e87;
+      --sage-dark:  #4e7a5e;
+      --sage-light: #b8d4bf;
+      --blue:       #4a6fa5;
+      --blue-light: #d4e0f0;
+      --brown:      #5c4a32;
+      --text:       #2c2416;
+      --text-muted: #7a6e5e;
+      --white:      #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: var(--beige);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(245, 240, 232, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--beige-dark);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(44,36,22,0.08); }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brown);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--sage-dark); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--sage-dark); }
+
+    .nav-cta {
+      background: var(--sage-dark);
+      color: var(--white) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+    }
+    .nav-cta:hover { background: var(--sage) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 72px;
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 5rem 6rem;
+      position: relative;
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 10%; bottom: 10%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--beige-dark), transparent);
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      margin-bottom: 1.5rem;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 600;
+      line-height: 1.05;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--sage-dark);
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 44ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--sage-dark);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-block;
+      color: var(--blue);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      border-bottom: 1px solid var(--blue-light);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--sage-dark); border-color: var(--sage-light); }
+
+    .hero-quote {
+      margin-top: 3rem;
+      padding: 1.2rem 1.5rem;
+      border-left: 3px solid var(--sage-light);
+      background: rgba(184, 212, 191, 0.15);
+      border-radius: 0 4px 4px 0;
+    }
+    .hero-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .hero-quote cite {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      font-style: normal;
+      color: var(--sage-dark);
+      letter-spacing: 0.05em;
+    }
+
+    .hero-right {
+      background: linear-gradient(145deg, var(--sage-light) 0%, var(--blue-light) 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237a9e87' fill-opacity='0.08'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-stats {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 3rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--sage-dark);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      line-height: 1.4;
+    }
+
+    /* ── SECTIONS COMMON ── */
+    section { padding: 6rem 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+    .section-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      background: rgba(122, 158, 135, 0.12);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      color: var(--brown);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-lead {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 60ch;
+      line-height: 1.8;
+    }
+
+    /* ── À PROPOS ── */
+    #apropos { background: var(--white); }
+    .apropos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 3.5rem;
+    }
+    .apropos-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+    .apropos-text p strong { color: var(--brown); font-weight: 500; }
+
+    .testimonial {
+      background: linear-gradient(135deg, rgba(122,158,135,0.1), rgba(74,111,165,0.08));
+      border: 1px solid var(--sage-light);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .testimonial blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+    .testimonial cite {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+    }
+
+    .competences-list { margin-top: 1.5rem; }
+    .competences-list h4 {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1rem;
+    }
+    .comp-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--beige-dark);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .comp-item:last-child { border-bottom: none; }
+    .comp-dot {
+      width: 6px; height: 6px;
+      background: var(--sage);
+      border-radius: 50%;
+      margin-top: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--beige); }
+    .services-intro { margin-bottom: 3rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--beige-dark);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--sage), var(--blue));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover { box-shadow: 0 8px 32px rgba(44,36,22,0.08); transform: translateY(-2px); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      background: rgba(122,158,135,0.1);
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .service-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: 0.7rem;
+    }
+    .service-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* ── RÉSULTATS ── */
+    #resultats {
+      background: linear-gradient(160deg, var(--sage-dark) 0%, #2a5a3e 100%);
+      color: var(--white);
+    }
+    #resultats .section-tag {
+      background: rgba(255,255,255,0.12);
+      color: var(--sage-light);
+    }
+    #resultats .section-title { color: var(--white); }
+    #resultats .section-lead { color: rgba(255,255,255,0.7); }
+
+    .resultats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .resultat-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .resultat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: var(--sage-light);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .resultat-label {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.5;
+    }
+
+    .resultats-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .resultats-detail h4 {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sage-light);
+      margin-bottom: 1rem;
+    }
+    .resultats-detail ul {
+      list-style: none;
+    }
+    .resultats-detail li {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+      padding: 0.4rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .resultats-detail li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--sage-light);
+      font-size: 0.75rem;
+    }
+
+    /* ── RÉFÉRENCES ── */
+    #references { background: var(--white); }
+    .references-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .ref-pill {
+      background: var(--beige);
+      border: 1px solid var(--beige-dark);
+      border-radius: 4px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--brown);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .ref-pill:hover {
+      background: rgba(122,158,135,0.1);
+      border-color: var(--sage-light);
+    }
+    .ref-note {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--beige);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+    .contact-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--brown);
+      margin-bottom: 1rem;
+    }
+    .contact-info p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .contact-icon {
+      width: 32px; height: 32px;
+      background: rgba(122,158,135,0.15);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sage-dark);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    /* Contact Form */
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--white);
+      border: 1px solid var(--beige-dark);
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px rgba(122,158,135,0.15);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-submit {
+      background: var(--sage-dark);
+      color: var(--white);
+      border: none;
+      padding: 0.9rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      align-self: flex-start;
+    }
+    .form-submit:hover { background: var(--sage); transform: translateY(-1px); }
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown);
+      color: rgba(255,255,255,0.6);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.85);
+    }
+    footer p { font-size: 0.78rem; }
+    footer a {
+      color: var(--sage-light);
+      text-decoration: none;
+      font-size: 0.78rem;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--white); }
+    .footer-links { display: flex; gap: 1.5rem; }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 3rem 2rem; }
+      .hero-right { min-height: 300px; }
+      .hero-stats { grid-template-columns: 1fr 1fr; padding: 2rem; }
+      .apropos-grid,
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .resultats-grid { grid-template-columns: 1fr; }
+      .resultats-detail { grid-template-columns: 1fr; }
+      .container { padding: 0 1.5rem; }
+      section { padding: 4rem 0; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">Michel <span>Etienne</span></a>
+    <ul class="nav-links">
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#resultats">Résultats</a></li>
+      <li><a href="#references">Références</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Bureau d'expertises · Bâle, Suisse</p>
+      <h1 class="hero-name">Michel<br>Etienne</h1>
+      <p class="hero-title">Formation professionnelle & Assurance qualité</p>
+      <p class="hero-desc">Expertise au service des institutions publiques et privées, en Suisse et à l'international — en particulier en Afrique de l'Ouest.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Prendre contact</a>
+        <a href="#services" class="btn-secondary">Découvrir les services</a>
+      </div>
+      <div class="hero-quote">
+        <p>« En modifiant son regard, on modifie la pensée sur les choses et sur le monde. »</p>
+        <cite>— Philippe Delis, Vevey, 2012</cite>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-number">30+</div>
+          <div class="stat-label">années d'expérience en formation professionnelle</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">600</div>
+          <div class="stat-label">acteurs formés au Maroc (2023–2025)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">de satisfaction (70% très satisfaits)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">12</div>
+          <div class="stat-label">ans de direction d'un centre de FP (CEPV)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section id="apropos">
+    <div class="container">
+      <span class="section-tag fade-up">À propos</span>
+      <h2 class="section-title fade-up">Un expert de terrain,<br>au service de la formation</h2>
+      <div class="apropos-grid">
+        <div class="apropos-text fade-up">
+          <p>Michel Etienne, <strong>ingénieur de formation</strong>, dirige le bureau d'expertises éponyme. Fort de plus de 30 années d'expérience dans le domaine de la formation professionnelle, il a dirigé pendant près de 12 ans (2011–2023) le Centre d'Enseignement Professionnel de Vevey (CEPV), consolidant une expertise pratique et opérationnelle de terrain.</p>
+          <p>Il a ensuite élargi son action à l'international, en particulier en <strong>Afrique de l'Ouest</strong>, où il a mené de nombreuses missions de conseil, d'audit et d'assistance technique auprès de gouvernements et d'organismes partenaires.</p>
+          <p>Après plus de deux années de mission au <strong>Maroc</strong>, il met désormais son expérience internationale au service de projets de réforme, de structuration de systèmes de certification et d'amélioration continue.</p>
+          <p>Basé en Suisse, le bureau intervient en Suisse — notamment pour le <strong>SEFRI</strong> — ainsi qu'en Afrique de l'Ouest pour le compte de bailleurs, ministères, agences ou organismes techniques.</p>
+        </div>
+        <div class="fade-up">
+          <div class="testimonial">
+            <blockquote>« Merci pour ta sagesse tranquille, ton écoute précieuse et ton expertise toujours partagée avec humilité et bienveillance. Ton charisme naturel a inspiré plus d'un·e au Maroc. »</blockquote>
+            <cite>GIZ – Maroc</cite>
+          </div>
+          <div class="competences-list">
+            <h4>Compétences clés</h4>
+            <div class="comp-item"><span class="comp-dot"></span><span>Audit et renforcement de dispositifs de formation</span></div>
+            <div class="comp-item"><span class="comp-dot"></span><span>Mise en place de systèmes d'assurance qualité</span></div>
+            <div class="comp-item"><span class="comp-dot"></span><span>Conception de référentiels et cadres nationaux</span></div>
+            <div class="comp-item"><span class="comp-dot"></span><span>Formation de formateurs, coaching</span></div>
+            <div class="comp-item"><span class="comp-dot"></span><span>Appui à la gouvernance et politiques publiques</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <span class="section-tag fade-up">Services</span>
+      <h2 class="section-title fade-up">Deux axes d'intervention</h2>
+      <p class="section-lead fade-up">Des missions adaptées à vos besoins, de l'audit stratégique à l'accompagnement opérationnel sur le terrain.</p>
+      <div class="services-grid" style="margin-top:3rem;">
+        <div class="service-card fade-up">
+          <span class="service-card-tag">Axe 1 · Performance</span>
+          <h3>Audit & Diagnostic</h3>
+          <p>Évaluation des systèmes de formation ou de certification existants. Identification des forces, des risques et des pistes d'amélioration pour renforcer l'efficacité et l'atteinte des résultats attendus.</p>
+        </div>
+        <div class="service-card fade-up">
+          <span class="service-card-tag">Axe 1 · Performance</span>
+          <h3>Assurance Qualité</h3>
+          <p>Accompagnement dans la définition, l'implantation et l'évaluation de dispositifs d'assurance qualité visant la performance, la conformité et l'amélioration continue dans les centres ou dispositifs nationaux.</p>
+        </div>
+        <div class="service-card fade-up">
+          <span class="service-card-tag">Axe 2 · Stratégie</span>
+          <h3>Formation & Renforcement de capacités</h3>
+          <p>Conception et animation de formations sur mesure à destination des formateurs, cadres, responsables techniques ou décideurs — pour professionnaliser les équipes et ancrer les bonnes pratiques.</p>
+        </div>
+        <div class="service-card fade-up">
+          <span class="service-card-tag">Axe 2 · Stratégie</span>
+          <h3>Appui à la gouvernance</h3>
+          <p>Soutien à l'élaboration et à la mise en œuvre de politiques publiques, de cadres nationaux de certification, de dispositifs d'accréditation et de reconnaissance de qualifications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÉSULTATS -->
+  <section id="resultats">
+    <div class="container">
+      <span class="section-tag fade-up">Résultats 2023–2025</span>
+      <h2 class="section-title fade-up">Des impacts concrets et mesurables</h2>
+      <p class="section-lead fade-up">Projet GIZ – Maroc : renforcement des capacités et déploiement du système d'assurance qualité de la formation professionnelle.</p>
+      <div class="resultats-grid">
+        <div class="resultat-card fade-up">
+          <div class="resultat-number">600</div>
+          <div class="resultat-label">acteurs formés autour de 8 thématiques clés</div>
+        </div>
+        <div class="resultat-card fade-up">
+          <div class="resultat-number">70%</div>
+          <div class="resultat-label">de participants «&nbsp;très satisfaits&nbsp;»</div>
+        </div>
+        <div class="resultat-card fade-up">
+          <div class="resultat-number">100%</div>
+          <div class="resultat-label">de satisfaction globale sur l'ensemble des formations</div>
+        </div>
+      </div>
+      <div class="resultats-detail">
+        <div class="fade-up">
+          <h4>Bénéficiaires</h4>
+          <ul>
+            <li>Tuteurs & Tuteurs-référents</li>
+            <li>Formateurs & Formateurs référents (OFPPT)</li>
+            <li>Structures d'appui des Régions</li>
+            <li>Directeurs d'EFP</li>
+            <li>Chefs d'entreprise</li>
+          </ul>
+        </div>
+        <div class="fade-up">
+          <h4>Objectifs atteints</h4>
+          <ul>
+            <li>Renforcement des capacités en Formation Professionnelle en Milieu de Travail (FPMT)</li>
+            <li>Déploiement du système d'assurance qualité de la formation professionnelle au Maroc</li>
+            <li>Mise en œuvre concrète testée et évaluée dans plusieurs entreprises partenaires</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÉFÉRENCES -->
+  <section id="references">
+    <div class="container">
+      <span class="section-tag fade-up">Références</span>
+      <h2 class="section-title fade-up">Mandants & Partenaires</h2>
+      <p class="section-lead fade-up">Des organisations internationales et nationales qui font confiance à l'expertise du bureau.</p>
+      <div class="references-grid fade-up">
+        <span class="ref-pill">OIF — Organisation Internationale de la Francophonie</span>
+        <span class="ref-pill">GIZ — Coopération allemande</span>
+        <span class="ref-pill">GOPA Consultants</span>
+        <span class="ref-pill">DFP – Guinée Conakry</span>
+        <span class="ref-pill">OFPPT & DFP – Maroc</span>
+        <span class="ref-pill">SEFRI – Suisse</span>
+        <span class="ref-pill">CEPV – Vevey</span>
+      </div>
+      <p class="ref-note fade-up">D'autres références personnelles sont disponibles sur demande.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <span class="section-tag fade-up">Contact</span>
+      <h2 class="section-title fade-up">Parlons de votre projet</h2>
+      <div class="contact-grid">
+        <div class="fade-up">
+          <div class="contact-info">
+            <h3>Construire aujourd'hui<br>les compétences de demain.</h3>
+            <p>Basé à Bâle (Suisse), Michel Etienne est disponible pour des missions en Suisse comme à l'international. N'hésitez pas à décrire votre besoin — chaque mission fait l'objet d'une proposition personnalisée.</p>
+            <div class="contact-detail">
+              <div class="contact-icon">📍</div>
+              <span>Bâle, Suisse</span>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-icon">🌍</div>
+              <span>Disponible pour missions internationales</span>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-icon">in</div>
+              <a href="https://www.linkedin.com/in/metienne65/" target="_blank" rel="noopener">Profil LinkedIn</a>
+            </div>
+          </div>
+        </div>
+        <div class="fade-up">
+          <form class="contact-form" name="contact" action="https://formspree.io/f/xgobokob" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" required placeholder="Votre prénom" />
+              </div>
+              <div class="form-group">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" required placeholder="Votre nom" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="votre@email.com" />
+            </div>
+            <div class="form-group">
+              <label for="organisation">Organisation</label>
+              <input type="text" id="organisation" name="organisation" placeholder="Votre organisation (optionnel)" />
+            </div>
+            <div class="form-group">
+              <label for="sujet">Sujet</label>
+              <select id="sujet" name="sujet">
+                <option value="">Choisir un sujet...</option>
+                <option value="audit">Audit & Diagnostic</option>
+                <option value="qualite">Assurance Qualité</option>
+                <option value="formation">Formation & Renforcement</option>
+                <option value="gouvernance">Appui à la gouvernance</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required placeholder="Décrivez brièvement votre besoin ou projet..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Envoyer le message</button>
+            <p class="form-note">Réponse sous 48h ouvrables.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Michel Etienne · Bureau d'expertises</div>
+    <p>© 2026 · Bâle, Suisse</p>
+    <div class="footer-links">
+      <a href="#apropos">À propos</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Fade-up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Form submission feedback
+    const form = document.querySelector('.contact-form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        const btn = form.querySelector('.form-submit');
+        btn.textContent = 'Envoi en cours…';
+        btn.style.opacity = '0.7';
+      });
+    }
+  </script>
+</body>
+</html>
