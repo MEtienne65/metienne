@@ -794,6 +794,10 @@
             <blockquote>« Merci pour ta sagesse tranquille, ton écoute précieuse et ton expertise toujours partagée avec humilité et bienveillance. Ton charisme naturel a inspiré plus d'un·e au Maroc. »</blockquote>
             <cite>GIZ – Maroc</cite>
           </div>
+          <div class="testimonial" style="margin-top:1.2rem;">
+            <blockquote>« Son apport a été déterminant dans la structuration des procédures de la FPMT. Je le recommande sans hésitation à toute organisation recherchant un profil fiable, structuré et orienté qualité. »</blockquote>
+            <cite>Wissal Demami – GIZ / GOPA, Maroc</cite>
+          </div>
           <div class="competences-list">
             <h4>Compétences clés</h4>
             <div class="comp-item"><span class="comp-dot"></span><span>Audit et renforcement de dispositifs de formation</span></div>
@@ -1000,6 +1004,57 @@
   </footer>
   <div style="text-align:center; padding: 0.5rem; font-size:0.7rem; color:#aaa; background:#5c4a32;">© 2026 · Bâle, Suisse · CHE-279.557.918</div>
 
+  <!-- BANNIÈRE COOKIES -->
+  <div id="cookie-banner" style="
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 9999;
+    background: #2c2416;
+    color: #f5f0e8;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  ">
+    <p style="margin:0; flex:1; min-width:200px;">
+      🍪 Ce site utilise des cookies pour améliorer votre expérience. En continuant à naviguer, vous acceptez notre utilisation des cookies conformément à la législation suisse (nLPD) et européenne (RGPD).
+      <a href="#" onclick="return false;" style="color: #b8d4bf; text-decoration: underline; margin-left: 0.3rem;">En savoir plus</a>
+    </p>
+    <div style="display:flex; gap:0.8rem; flex-shrink:0;">
+      <button onclick="refuserCookies()" style="
+        background: transparent;
+        border: 1px solid #7a6e5e;
+        color: #b8d4bf;
+        padding: 0.5rem 1.2rem;
+        border-radius: 2px;
+        cursor: pointer;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.82rem;
+        letter-spacing: 0.05em;
+        transition: all 0.2s;
+      ">Refuser</button>
+      <button onclick="accepterCookies()" style="
+        background: #4e7a5e;
+        border: none;
+        color: #fff;
+        padding: 0.5rem 1.4rem;
+        border-radius: 2px;
+        cursor: pointer;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.82rem;
+        letter-spacing: 0.05em;
+        transition: all 0.2s;
+      ">Accepter</button>
+    </div>
+  </div>
+
   <script>
     // Nav scroll effect
     const navbar = document.getElementById('navbar');
@@ -1018,6 +1073,24 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Cookie banner
+    const cookieBanner = document.getElementById('cookie-banner');
+    if (!localStorage.getItem('cookieConsent')) {
+      cookieBanner.style.display = 'flex';
+    }
+    function accepterCookies() {
+      localStorage.setItem('cookieConsent', 'accepted');
+      cookieBanner.style.transition = 'opacity 0.4s';
+      cookieBanner.style.opacity = '0';
+      setTimeout(() => cookieBanner.style.display = 'none', 400);
+    }
+    function refuserCookies() {
+      localStorage.setItem('cookieConsent', 'refused');
+      cookieBanner.style.transition = 'opacity 0.4s';
+      cookieBanner.style.opacity = '0';
+      setTimeout(() => cookieBanner.style.display = 'none', 400);
+    }
 
     // Form submission feedback
     const form = document.querySelector('.contact-form');
