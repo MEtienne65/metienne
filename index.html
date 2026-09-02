@@ -4,13 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9E09HDM7EV"></script>
+  <!-- Google Analytics – chargé uniquement après consentement (nLPD / RGPD) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9E09HDM7EV');
+
+    function chargerAnalytics() {
+      if (window.gaChargee) return;
+      window.gaChargee = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-9E09HDM7EV';
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', 'G-9E09HDM7EV', { anonymize_ip: true });
+    }
+
+    if (localStorage.getItem('cookieConsent') === 'accepted') {
+      chargerAnalytics();
+    }
   </script>
 
   <!-- SEO de base -->
@@ -1011,7 +1023,7 @@
       <a href="#contact">Contact</a>
     </div>
   </footer>
-  <div style="text-align:center; padding: 0.5rem; font-size:0.7rem; color:#aaa; background:#5c4a32;">© 2026 · Bâle, Suisse · CHE-279.557.918</div>
+  <div style="text-align:center; padding: 0.5rem; font-size:0.7rem; color:#aaa; background:#5c4a32;">© 2026 · Bâle, Suisse · CHE-279.557.918 · <span style="opacity:0.55;">v1.1 – 02.09.2026</span></div>
 
   <!-- BANNIÈRE COOKIES -->
   <div id="cookie-banner" style="
@@ -1022,7 +1034,6 @@
     background: #2c2416;
     color: #f5f0e8;
     padding: 1.2rem 2rem;
-    display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
@@ -1033,8 +1044,7 @@
     line-height: 1.5;
   ">
     <p style="margin:0; flex:1; min-width:200px;">
-      🍪 Ce site utilise des cookies pour améliorer votre expérience. En continuant à naviguer, vous acceptez notre utilisation des cookies conformément à la législation suisse (nLPD) et européenne (RGPD).
-
+      🍪 Ce site utilise Google Analytics pour mesurer sa fréquentation. Vous pouvez refuser sans restreindre l'accès.
     </p>
     <div style="display:flex; gap:0.8rem; flex-shrink:0;">
       <button onclick="refuserCookies()" style="
@@ -1090,6 +1100,7 @@
     }
     function accepterCookies() {
       localStorage.setItem('cookieConsent', 'accepted');
+      chargerAnalytics();
       cookieBanner.style.transition = 'opacity 0.4s';
       cookieBanner.style.opacity = '0';
       setTimeout(() => cookieBanner.style.display = 'none', 400);
