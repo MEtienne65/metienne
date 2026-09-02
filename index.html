@@ -4,25 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Google Analytics – chargé uniquement après consentement (nLPD / RGPD) -->
+  <!-- Google Analytics – chargé pour tous les visiteurs -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9E09HDM7EV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-
-    function chargerAnalytics() {
-      if (window.gaChargee) return;
-      window.gaChargee = true;
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-9E09HDM7EV';
-      document.head.appendChild(s);
-      gtag('js', new Date());
-      gtag('config', 'G-9E09HDM7EV', { anonymize_ip: true });
-    }
-
-    if (localStorage.getItem('cookieConsent') === 'accepted') {
-      chargerAnalytics();
-    }
+    gtag('js', new Date());
+    gtag('config', 'G-9E09HDM7EV', { anonymize_ip: true });
   </script>
 
   <!-- SEO de base -->
@@ -1023,56 +1011,7 @@
       <a href="#contact">Contact</a>
     </div>
   </footer>
-  <div style="text-align:center; padding: 0.5rem; font-size:0.7rem; color:#aaa; background:#5c4a32;">© 2026 · Bâle, Suisse · CHE-279.557.918 · <span style="opacity:0.55;">v1.1 – 02.09.2026</span></div>
-
-  <!-- BANNIÈRE COOKIES -->
-  <div id="cookie-banner" style="
-    display: none;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    z-index: 9999;
-    background: #2c2416;
-    color: #f5f0e8;
-    padding: 1.2rem 2rem;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    line-height: 1.5;
-  ">
-    <p style="margin:0; flex:1; min-width:200px;">
-      🍪 Ce site utilise Google Analytics pour mesurer sa fréquentation. Vous pouvez refuser sans restreindre l'accès.
-    </p>
-    <div style="display:flex; gap:0.8rem; flex-shrink:0;">
-      <button onclick="refuserCookies()" style="
-        background: transparent;
-        border: 1px solid #7a6e5e;
-        color: #b8d4bf;
-        padding: 0.5rem 1.2rem;
-        border-radius: 2px;
-        cursor: pointer;
-        font-family: 'DM Sans', sans-serif;
-        font-size: 0.82rem;
-        letter-spacing: 0.05em;
-        transition: all 0.2s;
-      ">Refuser</button>
-      <button onclick="accepterCookies()" style="
-        background: #4e7a5e;
-        border: none;
-        color: #fff;
-        padding: 0.5rem 1.4rem;
-        border-radius: 2px;
-        cursor: pointer;
-        font-family: 'DM Sans', sans-serif;
-        font-size: 0.82rem;
-        letter-spacing: 0.05em;
-        transition: all 0.2s;
-      ">Accepter</button>
-    </div>
-  </div>
+  <div style="text-align:center; padding: 0.5rem; font-size:0.7rem; color:#aaa; background:#5c4a32;">© 2026 · Bâle, Suisse · CHE-279.557.918 · <span style="opacity:0.55;">v1.2 – 02.09.2026</span></div>
 
   <script>
     // Nav scroll effect
@@ -1092,25 +1031,6 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // Cookie banner
-    const cookieBanner = document.getElementById('cookie-banner');
-    if (!localStorage.getItem('cookieConsent')) {
-      cookieBanner.style.display = 'flex';
-    }
-    function accepterCookies() {
-      localStorage.setItem('cookieConsent', 'accepted');
-      chargerAnalytics();
-      cookieBanner.style.transition = 'opacity 0.4s';
-      cookieBanner.style.opacity = '0';
-      setTimeout(() => cookieBanner.style.display = 'none', 400);
-    }
-    function refuserCookies() {
-      localStorage.setItem('cookieConsent', 'refused');
-      cookieBanner.style.transition = 'opacity 0.4s';
-      cookieBanner.style.opacity = '0';
-      setTimeout(() => cookieBanner.style.display = 'none', 400);
-    }
 
     // Form submission feedback
     const form = document.querySelector('.contact-form');
